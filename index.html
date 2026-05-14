@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>MD Munna Choukider | Hospitality Service Excellence</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #0A0806;
+            font-family: 'Inter', sans-serif;
+            color: #E6DFD3;
+            line-height: 1.4;
+        }
+        :root {
+            --gold: #C9A87C;
+            --gold-dark: #B28B5E;
+            --cream: #F7F3E8;
+            --beige: #DCD0BA;
+        }
+
+        /* ----- NAVBAR with hamburger menu ----- */
+        .navbar {
+            background: #FFFFFF;
+            padding: 1rem 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(201,168,124,0.2);
+        }
+        .nav-container {
+            max-width: 1300px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1F1A15;
+            text-decoration: none;
+            border-left: 3px solid var(--gold);
+            padding-left: 12px;
+        }
+        .logo span {
+            color: var(--gold-dark);
+        }
+        /* Hamburger icon (hidden on desktop) */
+        .menu-icon {
+            display: none;
+            font-size: 1.8rem;
+            color: #1F1A15;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .menu-icon:hover {
+            color: var(--gold-dark);
+        }
+        /* Nav links container */
+        .nav-links {
+            display: flex;
+            gap: 1.8rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 500;
+            color: #2C241B;
+            transition: 0.2s;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.2s;
+        }
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--gold-dark);
+        }
+        .hire-btn {
+            background: #1F1A15;
+            color: #FFF3E6 !important;
+            padding: 0.5rem 1.3rem;
+            border-radius: 40px;
+            border: 1px solid var(--gold);
+        }
+        /* Mobile responsive */
+        @media (max-width: 780px) {
+            .menu-icon {
+                display: block;
+            }
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+                padding-top: 1rem;
+                background: #FFFFFF;
+                border-radius: 20px;
+                margin-top: 0.8rem;
+            }
+            .nav-links.show {
+                display: flex;
+            }
+            .nav-links a {
+                width: 100%;
+                padding: 0.5rem 0;
+            }
+            .hire-btn {
+                width: fit-content;
+            }
+        }
+
+        /* ----- MAIN CONTAINER ----- */
+        .page-container {
+            max-width: 1300px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        .page {
+            display: none;
+            animation: fade 0.3s ease;
+        }
+        .active-page {
+            display: block;
+        }
+        @keyframes fade {
+            from { opacity: 0; transform: translateY(8px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+
+        /* ----- HERO SECTION (text left, image right) ----- */
+        .hero {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        .hero-content {
+            flex: 1;
+        }
+        .tagline {
+            font-size: 0.85rem;
+            letter-spacing: 4px;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+        .hero-content h1 {
+            font-size: 3.2rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            line-height: 1.2;
+            margin: 0.5rem 0 1rem;
+        }
+        .hero-content p {
+            font-size: 1rem;
+            color: var(--beige);
+            max-width: 90%;
+            margin-bottom: 2rem;
+        }
+        .btn-gold {
+            background: transparent;
+            border: 1.5px solid var(--gold);
+            color: var(--gold);
+            padding: 0.7rem 2rem;
+            border-radius: 40px;
+            font-weight: 600;
+            display: inline-block;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .btn-gold:hover {
+            background: var(--gold);
+            color: #0A0806;
+            transform: translateY(-2px);
+        }
+        .hero-image {
+            flex: 0 0 auto;
+        }
+        .portrait-card {
+            background: linear-gradient(145deg, #1F1B16, #13100D);
+            border-radius: 32px;
+            padding: 12px;
+            box-shadow: 0 20px 35px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,168,124,0.2);
+            transition: 0.3s;
+        }
+        .portrait-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 25px 40px -12px black, 0 0 0 1px var(--gold), 0 0 18px rgba(201,168,124,0.3);
+        }
+        .portrait {
+            width: 240px;
+            height: 240px;
+            border-radius: 28px;
+            overflow: hidden;
+        }
+        .portrait img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        @media (max-width: 780px) {
+            .hero { flex-direction: column; text-align: center; }
+            .hero-content p { max-width: 100%; }
+            .portrait { width: 200px; height: 200px; }
+        }
+
+        /* ----- STATS CARDS ----- */
+        .exp-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .stat-card {
+            background: #1A1612;
+            border-radius: 20px;
+            padding: 1.2rem;
+            text-align: center;
+            border-bottom: 3px solid var(--gold);
+            transition: 0.2s;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+            background: #211D18;
+        }
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        /* ----- EXPERIENCE CARDS (Homepage) ----- */
+        .section-title {
+            font-size: 2rem;
+            font-family: 'Cormorant Garamond', serif;
+            border-left: 5px solid var(--gold);
+            padding-left: 1rem;
+            margin: 2rem 0 1.5rem;
+        }
+        .exp-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .exp-card {
+            background: #14110E;
+            border-radius: 24px;
+            padding: 1.5rem;
+            border: 1px solid #2A241F;
+            transition: all 0.3s ease;
+        }
+        .exp-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+            box-shadow: 0 15px 25px -10px rgba(201,168,124,0.2);
+        }
+        .exp-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.2rem;
+        }
+        .exp-sub {
+            color: var(--gold);
+            font-weight: 500;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+        }
+        .phone-link {
+            display: block;
+            color: var(--beige);
+            font-size: 0.85rem;
+            margin-top: 0.8rem;
+        }
+
+        /* ----- CONTACT SECTION ----- */
+        .contact-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        .contact-form, .contact-info {
+            background: #14110E;
+            border-radius: 24px;
+            padding: 1.8rem;
+            transition: 0.2s;
+        }
+        .contact-form:hover, .contact-info:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+        }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            background: #1E1B17;
+            border: 1px solid #39312A;
+            padding: 0.8rem;
+            border-radius: 18px;
+            color: white;
+            margin-bottom: 1rem;
+        }
+        .social-icons a {
+            color: var(--beige);
+            margin-right: 1rem;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+        .social-icons a:hover {
+            color: var(--gold);
+        }
+        @media (max-width: 780px) {
+            .contact-section { grid-template-columns: 1fr; }
+        }
+
+        /* ----- OTHER PAGES (About, Experience, Education, Skills, Contact) ----- */
+        .card {
+            background: #14110E;
+            border-radius: 24px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #2A241F;
+            transition: 0.2s;
+        }
+        .card:hover {
+            border-color: var(--gold);
+        }
+        h2 {
+            font-size: 2rem;
+            font-family: 'Cormorant Garamond', serif;
+            border-left: 4px solid var(--gold);
+            padding-left: 1rem;
+            margin: 1.5rem 0 1rem;
+        }
+        .list-styled {
+            list-style: none;
+            padding-left: 0;
+        }
+        .list-styled li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+        .list-styled li::before {
+            content: "▹";
+            color: var(--gold);
+            position: absolute;
+            left: 0;
+        }
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            display: inline-block;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: 0.2s;
+        }
+        .btn-outline:hover {
+            background: var(--gold);
+            color: #0A0806;
+        }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid #2A241F;
+            margin-top: 3rem;
+            font-size: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-container">
+        <a href="#" class="logo" data-nav="home">MD MUNNA <span>Choukider</span></a>
+        <!-- Hamburger icon -->
+        <div class="menu-icon" id="menuIcon">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class="nav-links" id="navLinks">
+            <a href="#" data-nav="home" class="nav-link">Home</a>
+            <a href="#" data-nav="about" class="nav-link">About</a>
+            <a href="#" data-nav="experience" class="nav-link">Experience</a>
+            <a href="#" data-nav="education" class="nav-link">Education</a>
+            <a href="#" data-nav="skills" class="nav-link">Skills</a>
+            <a href="#" data-nav="contact" class="nav-link">Contact</a>
+            <a href="#" data-nav="contact" class="hire-btn">Hire Me</a>
+        </div>
+    </div>
+</nav>
+
+<div class="page-container">
+    <!-- ==================== HOME PAGE ==================== -->
+    <div id="home-page" class="page active-page">
+        <div class="hero">
+            <div class="hero-content">
+                <div class="tagline">SERVICE · HOSPITALITY · TOURISM</div>
+                <h1>Hospitality <span style="color:var(--gold);">Service Excellence</span></h1>
+                <p>Professional hospitality specialist from Bangladesh with experience in restaurant operations, tourism, customer support, and guest handling.</p>
+                <a href="#" class="btn-gold" data-nav="contact">Contact Me →</a>
+            </div>
+            <div class="hero-image">
+                <div class="portrait-card">
+                    <div class="portrait">
+                        <img src="https://i.ibb.co/Mkz37yVT/A858-EA5-A-A443-4-A06-AAD4-291546302-AD2.png" alt="MD Munna Choukider">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="exp-stats">
+            <div class="stat-card"><div class="stat-number">3+ Years</div><div>In Hospitality & Customer Service</div></div>
+            <div class="stat-card"><div class="stat-number">BTSI</div><div>Hospitality & Tourism Management</div></div>
+            <div class="stat-card"><div class="stat-number">2+</div><div>Languages</div><div style="font-size:0.75rem;">Bangla, English, Urdu, Hindi</div></div>
+            <div class="stat-card"><div class="stat-number">100%</div><div>Service Education</div></div>
+        </div>
+
+        <!-- Experience That Speaks -->
+        <div class="section-title">Experience That Speaks</div>
+        <div class="exp-grid">
+            <div class="exp-card">
+                <h3>Restaurant Operations Management</h3>
+                <div class="exp-sub">Restaurant Tendered</div>
+                <p>Assisting with food service, cleanliness, delivery of beverages, cashier handling, and maintaining hygiene standards.</p>
+                <div class="phone-link">📞 +880 1620-956666 - Presort</div>
+            </div>
+            <div class="exp-card">
+                <h3>Call Centre & Customer Support</h3>
+                <div class="exp-sub">Call Centre Support</div>
+                <p>Handling customer calls, providing information, solving issues, and ensuring customer satisfaction.</p>
+                <div class="phone-link">📞 +880 1620-956666 - Presort</div>
+            </div>
+            <div class="exp-card">
+                <h3>Guest Relations & Teamwork</h3>
+                <div class="exp-sub">Test & Player</div>
+                <p>Working in a team environment, coordinating with colleagues, and delivering excellent customer service.</p>
+                <div class="phone-link">📞 +880 1620-956666 - Presort</div>
+            </div>
+        </div>
+
+        <!-- Get In Touch -->
+        <div class="section-title">Get In Touch</div>
+        <div class="contact-section">
+            <div class="contact-form">
+                <h3 style="margin-bottom:1rem;">Send a Message</h3>
+                <form id="homeContactForm">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea rows="4" placeholder="Tell me about your project..."></textarea>
+                    <button type="submit" class="btn-gold">Send Message</button>
+                </form>
+            </div>
+            <div class="contact-info">
+                <h3>Contact Details</h3>
+                <p><i class="fas fa-phone-alt" style="color:var(--gold); width: 28px;"></i> +880 1620-956666</p>
+                <p><i class="fas fa-envelope" style="color:var(--gold); width: 28px;"></i> munna.choukider@gmail.com</p>
+                <p><i class="fas fa-map-marker-alt" style="color:var(--gold); width: 28px;"></i> Madanpur Sadar, Madanpur Bangladesh</p>
+                <div class="social-icons" style="margin-top:1rem;">
+                    <a href="https://www.facebook.com/share/18bYC54D4R/?mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook-f"></i> Facebook</a>
+                    <a href="https://linkedin.com/in/himelmunna" target="_blank"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                    <a href="https://github.com/himelmunna" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== ABOUT PAGE ==================== -->
+    <div id="about-page" class="page">
+        <h2>About Me</h2>
+        <div class="card">
+            <p><strong>MD Munna Choukider</strong> — motivated restaurant & tourism professional from Madaripur, Bangladesh. Currently Restaurant Trainee at Shopnochura Rooftop Restaurant. Previously Call Centre Executive at Sundarban Courier Service. Passionate about guest service and operational excellence.</p>
+        </div>
+        <div class="exp-stats">
+            <div class="stat-card"><div class="stat-number">📍</div><div>Madaripur Sadar</div></div>
+            <div class="stat-card"><div class="stat-number">🎂</div><div>15-Jan-2005</div></div>
+            <div class="stat-card"><div class="stat-number">🇧🇩</div><div>Bangladeshi</div></div>
+        </div>
+        <div class="card">
+            <h3>Languages</h3>
+            <ul class="list-styled">
+                <li>Bengali (Native)</li>
+                <li>English (Fluent B1-B2)</li>
+                <li>Urdu, Hindi (Conversational)</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ==================== EXPERIENCE PAGE ==================== -->
+    <div id="experience-page" class="page">
+        <h2>Work Experience</h2>
+        <div class="exp-grid">
+            <div class="exp-card"><h3>Restaurant Trainee</h3><div class="exp-sub">Shopnochura Rooftop Restaurant</div><ul class="list-styled"><li>Food service, hygiene, table setup</li><li>📅 11/07/2024 – Present</li></ul></div>
+            <div class="exp-card"><h3>Call Centre Executive</h3><div class="exp-sub">Sundarban Courier Service</div><ul class="list-styled"><li>Inbound calls, problem solving, tracking</li><li>📅 01/01/2023 – 30/06/2024</li></ul></div>
+            <div class="exp-card"><h3>Customer Service & Teamwork</h3><div class="exp-sub">Freelance / Various Projects</div><ul class="list-styled"><li>Team collaboration, discipline</li><li>📅 Ongoing</li></ul></div>
+        </div>
+    </div>
+
+    <!-- ==================== EDUCATION PAGE ==================== -->
+    <div id="education-page" class="page">
+        <h2>Education</h2>
+        <div class="card">
+            <h3>🎓 EQF Level 5 — Hospitality, Restaurant and Tourism</h3>
+            <p><strong>Bangladesh Technical & Software Institute (BTSI)</strong><br>Duration: 2 Years (19/01/2021 – 18/01/2023)</p>
+            <a href="https://btsibd.com" target="_blank" class="btn-outline"><i class="fas fa-external-link-alt"></i> Visit BTSI Website</a>
+        </div>
+        <div class="exp-grid">
+            <div class="card"><i class="fas fa-certificate" style="color:var(--gold); font-size:1.8rem;"></i><h3>Residential Operations</h3><p>On‑the‑job training</p></div>
+            <div class="card"><i class="fas fa-chalkboard-user" style="color:var(--gold); font-size:1.8rem;"></i><h3>Service Excellence</h3><p>Guest handling & hygiene</p></div>
+        </div>
+    </div>
+
+    <!-- ==================== SKILLS PAGE ==================== -->
+    <div id="skills-page" class="page">
+        <h2>Skills</h2>
+        <div class="exp-grid">
+            <div class="card"><h3>Core Hospitality</h3><ul class="list-styled"><li>Customer Service 85%</li><li>Restaurant Operations 82%</li><li>Guest Handling 90%</li><li>Hygiene & Safety 88%</li></ul></div>
+            <div class="card"><h3>Communication & Support</h3><ul class="list-styled"><li>Communication 87%</li><li>Call Centre Support 80%</li><li>Time Management 80%</li><li>Problem Solving 75%</li></ul></div>
+        </div>
+    </div>
+
+    <!-- ==================== CONTACT PAGE ==================== -->
+    <div id="contact-page" class="page">
+        <h2>Contact Me</h2>
+        <div class="contact-section" style="grid-template-columns:1fr 1fr;">
+            <div class="contact-form"><h3>Send a Message</h3><form id="contactForm"><input type="text" placeholder="Your Name" required><input type="email" placeholder="Your Email" required><textarea rows="4" placeholder="Your message..."></textarea><button type="submit" class="btn-gold">Send</button></form></div>
+            <div class="contact-info"><h3>Contact Details</h3><p>📞 +880 1620-956666</p><p>✉️ himelislammunna@gmail.com</p><p>📍 Madaripur Sadar, Bangladesh</p><div class="social-icons"><a href="https://www.facebook.com/share/18bYC54D4R/himel Islam munna" target="_blank">Facebook</a> <a href="https://linkedin.com/in/himelmunna" target="_blank">LinkedIn</a> <a href="https://github.com/himelmunna" target="_blank">GitHub</a></div></div>
+        </div>
+    </div>
+</div>
+<footer>© 2025 MD Munna Choukider — Hospitality Service Excellence</footer>
+
+<script>
+    // Page navigation
+    const pages = {
+        home: document.getElementById('home-page'),
+        about: document.getElementById('about-page'),
+        experience: document.getElementById('experience-page'),
+        education: document.getElementById('education-page'),
+        skills: document.getElementById('skills-page'),
+        contact: document.getElementById('contact-page')
+    };
+    function activate(pageId) {
+        Object.values(pages).forEach(p => p.classList.remove('active-page'));
+        pages[pageId].classList.add('active-page');
+        document.querySelectorAll('.nav-link').forEach(link => {
+            if(link.getAttribute('data-nav') === pageId) link.classList.add('active');
+            else link.classList.remove('active');
+        });
+        // Close hamburger menu after navigation (mobile)
+        const navLinks = document.getElementById('navLinks');
+        if (navLinks.classList.contains('show')) {
+            navLinks.classList.remove('show');
+        }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Attach click events to nav items
+    document.querySelectorAll('[data-nav]').forEach(el => {
+        el.addEventListener('click', (e) => {
+            e.preventDefault();
+            const target = el.getAttribute('data-nav');
+            if(pages[target]) activate(target);
+        });
+    });
+
+    // Hamburger menu toggle
+    const menuIcon = document.getElementById('menuIcon');
+    const navLinks = document.getElementById('navLinks');
+    menuIcon.addEventListener('click', () => {
+        navLinks.classList.toggle('show');
+    });
+
+    // Contact form submissions
+    document.querySelectorAll('#homeContactForm, #contactForm').forEach(form => {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you! MD Munna will reply soon.');
+            form.reset();
+        });
+    });
+
+    // Activate home by default
+    activate('home');
+</script>
+</body>
+</html>
